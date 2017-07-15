@@ -6,7 +6,7 @@ Requires execline and s6 from [skarnet].
 
 PAM configuration:
 ```
-session		optional	pam_exec.so seteuid log=/tmp/pam.log /path/to/wolf-session-pam
+session		optional	pam_exec.so seteuid /path/to/wolf-session-pam
 ```
 
 [skarnet]: https://skarnet.org/poweredby.html
