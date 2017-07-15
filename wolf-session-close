@@ -1,0 +1,7 @@
+#!/usr/local/skarnet/bin/execlineb -S1
+#
+# wolf-session-close <session-id>
+
+define STATE_DIR /run/wolf-login
+if { s6-ftrig-notify ${STATE_DIR}/session/${1}/event C }
+rm -r ${STATE_DIR}/session/${1}

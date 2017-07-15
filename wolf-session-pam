@@ -1,0 +1,13 @@
+#!/usr/local/skarnet/bin/execlineb
+#
+# wolf-session-pam
+
+define BINDIR /home/wolf480/git/wolf-logind
+importas PAM_TYPE PAM_TYPE
+importas PAM_USER PAM_USER
+ifelse { [ "${PAM_TYPE}" = "open_session" ] } {
+    backtick PWLINE { getent passwd ${PAM_USER} } importas PWLINE PWLINE
+    multidefine -d : $PWLINE { "" "" UID }
+    ${BINDIR}/wolf-session-open c1 $UID
+} if { [ "${PAM_TYPE}" = "close_session" ] }
+    ${BINDIR}/wolf-session-close c1

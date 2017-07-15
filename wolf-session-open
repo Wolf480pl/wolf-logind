@@ -1,0 +1,9 @@
+#!/usr/local/skarnet/bin/execlineb -S2
+#
+# wolf-session-open <session-id> <uid>
+
+define STATE_DIR /run/wolf-login
+if { mkdir -p ${STATE_DIR}/session/${1} }
+if { redirfd -x 1 ${STATE_DIR}/session/${1}/uid echo ${2} }
+if { s6-mkfifodir ${STATE_DIR}/session/${1}/event }
+s6-ftrig-notify ${STATE_DIR}/event S
